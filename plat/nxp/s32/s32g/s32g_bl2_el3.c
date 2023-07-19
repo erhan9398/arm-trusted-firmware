@@ -3,7 +3,7 @@
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
-
+#include <stdio.h>
 #include <lib/mmio.h>
 #include "s32g_clocks.h"
 #if (ERRATA_S32_050543 == 1)
@@ -87,22 +87,22 @@ void bl2_el3_early_platform_setup(u_register_t arg0, u_register_t arg1,
 	bl_mem_params_node_t *params = s32g_bl2_mem_params_descs;
 	struct s32g_ssram_mailbox *ssram_mb = (void *)BL31SSRAM_MAILBOX;
 
-	NOTICE("##### TOGG_TEST function entery\n");fflush();
+	NOTICE("##### TOGG_TEST function entery\n");fflush(0);
 	reset_cause = get_reset_cause();
 	clear_reset_cause();
 	if ((reset_cause == CAUSE_WAKEUP_DURING_STANDBY) &&
 	    !ssram_mb->short_boot) {
 		/* Trampoline to bl31_warm_entrypoint */
-		NOTICE("##### TOGG_TEST normal run\n");fflush();
+		NOTICE("##### TOGG_TEST normal run\n");fflush(0);
 		resume_bl31(ssram_mb);
-		NOTICE("##### TOGG_TEST some error\n");fflush();
+		NOTICE("##### TOGG_TEST some error\n");fflush(0);
 		panic();
 	}
 
 	s32_early_plat_init(false);
 	console_s32_register();
 	s32_io_setup();
-	NOTICE("##### TOGG_TEST reset cause\n");fflush();
+	NOTICE("##### TOGG_TEST reset cause\n");fflush(0);
 	NOTICE("Reset status: %s\n", get_reset_cause_str(reset_cause));
 
 	add_fip_img_to_mem_params_descs(params, &index);
