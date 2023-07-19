@@ -86,19 +86,13 @@ void bl2_el3_early_platform_setup(u_register_t arg0, u_register_t arg1,
 	size_t index = 0;
 	bl_mem_params_node_t *params = s32g_bl2_mem_params_descs;
 	struct s32g_ssram_mailbox *ssram_mb = (void *)BL31SSRAM_MAILBOX;
-	volatile int temp = 1000000;
-	NOTICE("##### TOGG_TEST function entery\n");while(temp-- != 0);
-	temp = 1000000;
+	volatile int temp = 200000;
 	reset_cause = get_reset_cause();
 	clear_reset_cause();
 	if ((reset_cause == CAUSE_WAKEUP_DURING_STANDBY) &&
 	    !ssram_mb->short_boot) {
 		/* Trampoline to bl31_warm_entrypoint */
-		NOTICE("##### TOGG_TEST normal run\n");while(temp-- != 0);
-		temp = 1000000;
 		resume_bl31(ssram_mb);
-		NOTICE("##### TOGG_TEST some error\n");while(temp-- != 0);
-		temp = 1000000;
 		panic();
 	}
 
@@ -106,13 +100,20 @@ void bl2_el3_early_platform_setup(u_register_t arg0, u_register_t arg1,
 	console_s32_register();
 	s32_io_setup();
 	NOTICE("##### TOGG_TEST reset cause\n");while(temp-- != 0);
-	NOTICE("Reset status: %s\n", get_reset_cause_str(reset_cause));
-
+	NOTICE("Reset status: %s\n", get_reset_cause_str(reset_cause));temp = 200000;
+	
+	
+	NOTICE("##### TOGG_TEST add_fip_img_to_mem_params_descs\n");while(temp-- != 0);temp = 200000;
 	add_fip_img_to_mem_params_descs(params, &index);
+	NOTICE("##### TOGG_TEST add_bl31_img_to_mem_params_descs\n");while(temp-- != 0);temp = 200000;
 	add_bl31_img_to_mem_params_descs(params, &index);
+	NOTICE("##### TOGG_TEST add_bl32_img_to_mem_params_descs\n");while(temp-- != 0);temp = 200000;
 	add_bl32_img_to_mem_params_descs(params, &index);
+	NOTICE("##### TOGG_TEST add_bl32_extra1_img_to_mem_params_descs\n");while(temp-- != 0);temp = 200000;
 	add_bl32_extra1_img_to_mem_params_descs(params, &index);
+	NOTICE("##### TOGG_TEST add_bl33_img_to_mem_params_descs\n");while(temp-- != 0);temp = 200000;
 	add_bl33_img_to_mem_params_descs(params, &index);
+	NOTICE("##### TOGG_TEST add_invalid_img_to_mem_params_descs\n");while(temp-- != 0);temp = 200000;
 	add_invalid_img_to_mem_params_descs(params, &index);
 
 	bl_mem_params_desc_num = index;
