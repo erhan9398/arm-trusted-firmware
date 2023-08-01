@@ -150,7 +150,7 @@ COLD_BOOT_SINGLE_CPU		:= 0
 BL2_EL3_STACK_ALIGNMENT :=	512
 $(eval $(call add_define_val,BL2_EL3_STACK_ALIGNMENT,$(BL2_EL3_STACK_ALIGNMENT)))
 
-FDT_SOURCES             = $(addprefix fdts/, $(patsubst %.dtb,%.dts,$(DTB_FILE_NAME)))
+FDT_SOURCES             = $(addprefix fdts/s32g2/, $(patsubst %.dtb,%.dts,$(DTB_FILE_NAME)))
 
 ### Devel & Debug options ###
 ifeq (${DEBUG},1)
